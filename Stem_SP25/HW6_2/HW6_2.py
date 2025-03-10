@@ -1,3 +1,4 @@
+#utilized chatGPT
 # region imports
 from Fluid import Fluid
 from Pipe import Pipe
@@ -22,11 +23,11 @@ def main():
     :return:
     '''
     #instantiate a Fluid object to define the working fluid as water
-    water= #$JES MISSING CODE$  #
+    water = Fluid(mu=0.00089, rho=1000)  #
     roughness = 0.00025  # in meters
 
     #instantiate a new PipeNetwork object
-    PN=#$JES MISSING CODE$  #
+    PN = PipeNetwork()  #
     #add Pipe objects to the pipe network (see constructor for Pipe class)
     PN.pipes.append(Pipe('a','b',250, 300, roughness, water))
     PN.pipes.append(Pipe('a','c',100, 200, roughness, water))

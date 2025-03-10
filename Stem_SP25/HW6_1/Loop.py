@@ -7,6 +7,7 @@ class Loop():
         """
         #region attributes
         self.Nodes = []
+        self.Name = ""
         #endregion
     #endregion
 #endregion

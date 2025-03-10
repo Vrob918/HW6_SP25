@@ -60,9 +60,9 @@ class ResistorNetwork():
         :param Txt: [string] the lines of the text file
         :return: a resistor object
         """
-        R = #JES Missing Code  # instantiate a new resistor object
+        R = Resistor()  # instantiate a new resistor object
         N += 1  # <Resistor> was detected, so move to next line in Txt
-        txt = #JES Missing Code  # retrieve line from Txt and make it lower case using Txt[N].lower()
+        txt = Txt[N].lower()  # retrieve line from Txt and make it lower case using Txt[N].lower()
         while "resistor" not in txt:
             if "name" in txt:
                 R.Name = txt.split('=')[1].strip()
@@ -125,7 +125,7 @@ class ResistorNetwork():
         :return:
         """
         # need to set the currents to that Kirchoff's laws are satisfied
-        i0 = #JES MISSING CODE  #define an initial guess for the currents in the circuit
+        i0 = [0.0, 0.0, 0.0]  #define an initial guess for the currents in the circuit
         i = fsolve(self.GetKirchoffVals,i0)
         # print output to the screen
         print("I1 = {:0.1f}".format(i[0]))
@@ -212,11 +212,22 @@ class ResistorNetwork_2(ResistorNetwork):
 
     #region methods
     def AnalyzeCircuit(self):
-        #JES Missing Code
-        pass
+        i0 = [0.0, 0.0, 0.0]  # example initial guess for 3 currents
+        i = fsolve(self.GetKirchoffVals, i0)
+        print("I1_2 = {:0.1f}".format(i[0]))
+        print("I2_2 = {:0.1f}".format(i[1]))
+        print("I3_2 = {:0.1f}".format(i[2]))
+        return i
 
     def GetKirchoffVals(self,i):
-        #JES Missing Code
-        pass
+        self.GetResistorByName('ad').Current = i[0]
+        self.GetResistorByName('bc').Current = i[0]
+        self.GetResistorByName('cd').Current = i[2]
+        self.GetResistorByName('ce').Current = i[1]
+
+        Node_c_Current = i[0] + i[1] - i[2]
+        KVL = self.GetLoopVoltageDrops()
+        KVL.append(Node_c_Current)
+        return KVL
     #endregion
 #endregion

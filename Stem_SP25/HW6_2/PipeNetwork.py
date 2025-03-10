@@ -45,13 +45,13 @@ class PipeNetwork():
             """
             #update the flow rate in each pipe object
             for i in range(len(self.pipes)):
-                self.pipes[i].Q= #$JES MISSING CODE$  # set volumetric flow rate from input argument q
+                self.pipes[i].Q = q[i]  # set volumetric flow rate from input argument q
             #calculate the net flow rate for the node objects
             # note:  when flow rates in pipes are correct, the net flow into each node should be zero.
-            L=  #$JES MISSING CODE$  # call the getNodeFlowRates function of this class
+            L = self.getNodeFlowRates()  # call the getNodeFlowRates function of this class
             #calculate the net head loss for the loop objects
             # note: when the flow rates in pipes are correct, the net head loss for each loop should be zero.
-            L+= #$JES MISSING CODE$  # call the getLoopHeadLosses function of this class
+            L += self.getLoopHeadLosses()  # call the getLoopHeadLosses function of this class
             return L
         #using fsolve to find the flow rates
         FR=fsolve(fn,Q0)
